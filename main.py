@@ -29,4 +29,17 @@ with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.
     out = os.popen(cmd).read()
     text = '/protecc ' + out
     await client.send_message(-1001384823039, text)
+
+   @client.on(events.NewMessage(from_users="WaifuGacha_bot"))
+   async def handler(event):
+         text = event.message.message
+         regex = "TICKETS FULL"
+         if re.search(regex, text) is not None :
+            await client.send_message(1976201765, 'Fast Autoplay 🎟🔄')
+   @client.on(events.NewMessage(from_users="WaifuGacha_bot"))
+   async def handler(event):
+         text = event.message.message
+         if re.search("activate", text) is not None :
+           await event.click(0)
    client.run_until_disconnected()
+
