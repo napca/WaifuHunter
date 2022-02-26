@@ -1,7 +1,5 @@
 from telethon.sync import TelegramClient, events
 import config
-import time
-from random import randrange
 import re
 import os
 
@@ -21,14 +19,18 @@ with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.
     message = event.message
     if(message.photo is not None): #check message has photo
          await   client.forward_messages("@StarkTelegraphBot" , event.message)
-   @client.on(events.MessageEdited(from_users="StarkTelegraphBot"))
+   @client.on(events.NewMessage(from_users="StarkTelegraphBot"))
    async def handler(event):
-    message = event.message
-    cmd = 'URL=' + message.message + ' ./cmd.sh'
-    print(os.system(cmd))
-    out = os.popen(cmd).read()
-    text = '/protecc ' + out
-    await client.send_message(-1001384823039, text)
+         text = event.message.message
+         if re.search('File is ready to Upload', text) is not None :
+           await event.click(0)
+         if re.search('https://', text) is not None :
+            message = event.message
+            cmd = 'URL=' + message.message + ' ./cmd.sh'
+            print(os.system(cmd))
+            out = os.popen(cmd).read()
+            text = '/protecc ' + out
+            await client.send_message(-1001384823039, text)
 
    @client.on(events.NewMessage(from_users="WaifuGacha_bot"))
    async def handler(event):
