@@ -63,6 +63,8 @@ with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.
            await event.click(0)
          if re.search("🛍 NEW DAILY SHOP! 🛍", text)is not None :
              await event.click(4)
+         if re.search("🗓 WEEKLY REWARD 🗓", text) is not None :
+             await event.click(0)
    @client.on(events.MessageEdited(from_users="WaifuGacha_bot"))
    async def handler(event):
         text=event.message.message
