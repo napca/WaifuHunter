@@ -69,7 +69,7 @@ with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.
         if re.search("You can buy tickets🎟 with diamonds💎", text)is not None:
          diamonds=int(re.search("(?<=Your diamonds: )(.*)(?= 💎)", text).group())
          tickets=int(re.search("(?<=Your Tickets: )(.*)(?= 🎟)", text).group())
-         if tickets = 1000:
+         if tickets == 1000:
              await client.send_message(1976201765, '🏖🎰 EVENT BANNER 🎰🏖')
          if diamonds > 65:
              await event.click(3)
