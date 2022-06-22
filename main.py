@@ -3,10 +3,11 @@ import config
 import re
 import os
 import schedule
+import time
 api_id = config.API_ID
 api_hash = config.API_HASH
 
-with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.1', 9050)) as client:
+with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5")) as client:
 
    print("Started.")
 
@@ -43,20 +44,23 @@ with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.
 
    def rewards():
        client.send_message(1976201765, '/start')
-       client.send_message(1976201765, 'Rewards 🎁')
-       client.send_message(1976201765, 'Daily Login 🌟')
-       client.send_message(1976201765, 'Achievements 🏆')
-       client.send_message(1976201765, 'Back 🔙')
-       client.send_message(1976201765, 'SHOP 🛍')
        print("werks.")
    schedule.every().day.do(rewards)
-#   schedule.run_all()
+   schedule.run_all()
 
    @client.on(events.NewMessage(from_users="WaifuGacha_bot"))
    async def handler(event):
          text = event.message.message
-         if re.search("🏆 Achievements 🏆", text) is not None :
-           await event.click(0)
+         if re.search("Main Menu", text) is not None :
+             await client.send_message(1976201765, 'Rewards 🎁')
+         if re.search("🎁 REWARDS 🎁", text) is not None :
+             await client.send_message(1976201765, 'Daily Login 🌟')
+             time.sleep(1)
+             client.send_message(1976201765, 'Achievements 🏆')
+             time.sleep(1)
+             client.send_message(1976201765, 'Back 🔙')
+             time.sleep(1)
+             client.send_message(1976201765, 'SHOP 🛍')
          if re.search("TICKETS FULL", text) is not None :
             await client.send_message(1976201765, 'Fast Autoplay 🎟🔄')
          if re.search("activate", text) is not None :
@@ -65,6 +69,8 @@ with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5", '127.0.0.
              await event.click(4)
          if re.search("🗓 WEEKLY REWARD 🗓", text) is not None :
              await event.click(0)
+         if re.search("🏆 Achievements 🏆", text) is not None :
+           await event.click(0)
    @client.on(events.MessageEdited(from_users="WaifuGacha_bot"))
    async def handler(event):
         text=event.message.message
