@@ -56,11 +56,11 @@ with TelegramClient('session-name' , api_id, api_hash) as client:
          if re.search("🎁 REWARDS 🎁", text) is not None :
              await client.send_message(1976201765, 'Daily Login 🌟')
              time.sleep(1)
-             client.send_message(1976201765, 'Achievements 🏆')
+             await client.send_message(1976201765, 'Achievements 🏆')
              time.sleep(1)
-             client.send_message(1976201765, 'Back 🔙')
+             await client.send_message(1976201765, 'Back 🔙')
              time.sleep(1)
-             client.send_message(1976201765, 'SHOP 🛍')
+             await client.send_message(1976201765, 'SHOP 🛍')
          if re.search("TICKETS FULL", text) is not None :
             await client.send_message(1976201765, 'Fast Autoplay 🎟🔄')
          if re.search("activate", text) is not None :
