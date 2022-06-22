@@ -7,7 +7,7 @@ import time
 api_id = config.API_ID
 api_hash = config.API_HASH
 
-with TelegramClient('session-name' , api_id, api_hash,proxy=("socks5")) as client:
+with TelegramClient('session-name' , api_id, api_hash) as client:
 
    print("Started.")
 
