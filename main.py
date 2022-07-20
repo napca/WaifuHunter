@@ -1,16 +1,36 @@
 from telethon.sync import TelegramClient, events
+from promise import Promise
 import config
 import re
 import os
 import schedule
 import time
+import asyncio
+from threading import Thread
 api_id = config.API_ID
 api_hash = config.API_HASH
 
 with TelegramClient('session-name' , api_id, api_hash) as client:
 
    print("Started.")
-
+   def rewards():
+       while True:
+        client.send_message(1976201765, '/start')
+        time.sleep(3)
+        client.send_message(1976201765, 'Rewards 🎁')
+        time.sleep(10)
+#   rewards()
+#   async def rewards():
+#        print(1)
+#        print(2)
+#        await Promise.all([client.send_message(1976201765, '/start'), client.send_message(1976201765, 'Rewards 🎁')]);
+#        asyncio.close()
+#        print('werks.')
+#   def thread():
+#       while True:
+#           asyncio.run(rewards())
+#           time.sleep(10)
+#   Thread(target=thread).start()
 
 
    @client.on(events.NewMessage(from_users="Collect_your_husbando_bot"))
@@ -42,24 +62,17 @@ with TelegramClient('session-name' , api_id, api_hash) as client:
 
 
 
-   def rewards():
-       client.send_message(1976201765, '/start')
-       print("werks.")
-   schedule.every().day.do(rewards)
-   schedule.run_all()
-
    @client.on(events.NewMessage(from_users="WaifuGacha_bot"))
    async def handler(event):
          text = event.message.message
-         if re.search("Main Menu", text) is not None :
-             await client.send_message(1976201765, 'Rewards 🎁')
          if re.search("🎁 REWARDS 🎁", text) is not None :
+             print("cum")
              await client.send_message(1976201765, 'Daily Login 🌟')
              time.sleep(1)
              await client.send_message(1976201765, 'Achievements 🏆')
              time.sleep(1)
              await client.send_message(1976201765, 'Back 🔙')
-             time.sleep(1)
+             time.sleep(3)
              await client.send_message(1976201765, 'SHOP 🛍')
          if re.search("TICKETS FULL", text) is not None :
             await client.send_message(1976201765, 'Fast Autoplay 🎟🔄')
@@ -78,10 +91,10 @@ with TelegramClient('session-name' , api_id, api_hash) as client:
          diamonds=int(re.search("(?<=Your diamonds: )(.*)(?= 💎)", text).group())
          tickets=int(re.search("(?<=Your Tickets: )(.*)(?= 🎟)", text).group())
          if tickets == 1000:
-             await client.send_message(1976201765, '🏖🎰 EVENT BANNER 🎰🏖')
-         if diamonds > 65:
+             await client.send_message(1976201765, 'PLAY NOW! 🎟')
+         if diamonds >= 65:
              await event.click(3)
          else:
-             await client.send_message(1976201765, '🏖🎰 EVENT BANNER 🎰🏖')
+           await client.send_message(1976201765, 'PLAY NOW! 🎟')
    client.run_until_disconnected()
 
